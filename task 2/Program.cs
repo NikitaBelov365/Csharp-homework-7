@@ -37,21 +37,24 @@ void PrintArray(int[,] array)
 
 bool IsExist(int[,] array, int row, int column)
 {
-    if (row >= 0 && row < array.GetLength(0) && column >= 0 && column < array.GetLength(1)) return true;
+    if (row > 0 && row-1 < array.GetLength(0) && column > 0 && column-1 < array.GetLength(1)) return true;
     else return false;
 }
 
 void Resulter(int[,] array, int row, int column, bool isExist)
 {
-    if (isExist) System.Console.WriteLine($"Value in array with row {row} and column {column} is {array[row, column]}");
+    if (isExist) 
+    {
+        System.Console.WriteLine($"Value in array with row {row} and column {column} is " + $"{array[(row-1), (column-1)]}");
+    }
     else System.Console.WriteLine($"Value in array with row {row} and column {column} is not in this array");
 }
 
-int rows = InputSize("Input ammount of rows");
-int columns = InputSize("Input ammount of columns");
+int rows = InputSize("Input ammount of rows in new array");
+int columns = InputSize("Input ammount of columns in new array");
 int[,] array = ArrayCreation(rows, columns);
-int row = InputSize("Input row");
-int column = InputSize("Input column");
 PrintArray(array);
+int row = InputSize("Enter the row number to display the element");
+int column = InputSize("Enter the column number to display the element");
 bool isExist = IsExist(array, row, column);
 Resulter(array, row, column, isExist);
