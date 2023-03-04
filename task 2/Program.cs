@@ -35,16 +35,16 @@ void PrintArray(int[,] array)
     System.Console.WriteLine();
 }
 
-(bool isExist, int value) ValueFinder(int[,] array, int row, int column)
+bool IsExist(int[,] array, int row, int column)
 {
-    if(row>=0 && row < array.GetLength(0) && column>=0 && column < array.GetLength(1)) return (true, array[row, column]);
-    else return (false, 0);
+    if (row >= 0 && row < array.GetLength(0) && column >= 0 && column < array.GetLength(1)) return true;
+    else return false;
 }
 
-void Resulter(bool isExist, int value)
+void Resulter(int[,] array, int row, int column, bool isExist)
 {
-    if(isExist) System.Console.WriteLine($"Value with index {row},{column} is: {value}");
-    else System.Console.WriteLine($"Value with index {row},{column} is not exist");
+    if (isExist) System.Console.WriteLine($"Value in array with row {row} and column {column} is {array[row, column]}");
+    else System.Console.WriteLine($"Value in array with row {row} and column {column} is not in this array");
 }
 
 int rows = InputSize("Input ammount of rows");
@@ -53,5 +53,5 @@ int[,] array = ArrayCreation(rows, columns);
 int row = InputSize("Input row");
 int column = InputSize("Input column");
 PrintArray(array);
-
-
+bool isExist = IsExist(array, row, column);
+Resulter(array, row, column, isExist);
