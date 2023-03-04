@@ -7,9 +7,9 @@ int InputSize(string message)
     return Convert.ToInt32(Console.ReadLine());
 }
 
-int[,] ArrayCreation(int m, int n)
+int[,] ArrayCreation(int row, int column)
 {
-    int[,] array = new int[m, n];
+    int[,] array = new int[row, column];
     for (int i = 0; i < array.GetLength(0); i++)
     {
         for (int j = 0; j < array.GetLength(1); j++)
@@ -50,8 +50,8 @@ void ArithmeticalMean(int[,] array)
     }
 }
 
-int rows = InputSize("Input ammount of rows");
-int columns = InputSize("Input ammount of columns");
+int rows = InputSize("Input ammount of rows in new array");
+int columns = InputSize("Input ammount of columns in new array");
 int[,] array = ArrayCreation(rows, columns);
 PrintArray(array);
 ArithmeticalMean(array);
