@@ -1,43 +1,57 @@
-﻿// Задача 2: Задайте одномерный массив, заполненный случайными числами. 
-// Найдите сумму элементов, стоящих на нечётных позициях.
+﻿// Задача 2: Напишите программу, 
+// которая на вход принимает позиции элемента в двумерном массиве, 
+// и возвращает значение этого элемента или же указание, 
+// что такого элемента нет.
 
-int InputSize(string msg)
+int InputSize(string message)
 {
-    System.Console.WriteLine(msg);
+    System.Console.WriteLine(message);
     return Convert.ToInt32(Console.ReadLine());
 }
 
-int[] ArrayCreation(int size)
+int[,] ArrayCreation(int m, int n)
 {
-    int[] array = new int[size];
-    for (int i = 0; i < array.Length; i++)
+    int[,] array = new int[m, n];
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        array[i] = new Random().Next(1, 10);
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            array[i, j] = new Random().Next(1, 10);
+        }
     }
     return array;
 }
 
-void PrintArray(int[] array)
+void PrintArray(int[,] array)
 {
-    for (int i = 0; i < array.Length; i++)
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        System.Console.Write($"{array[i]} ");
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            System.Console.Write($"{array[i, j]} ");
+        }
+        System.Console.WriteLine();
     }
     System.Console.WriteLine();
 }
 
-int UnEvenSum(int[] array)
+(bool isExist, int value) ValueFinder(int[,] array, int row, int column)
 {
-    int sum = 0;
-    for (int i = 0; i < array.Length; i+=2)
-    {
-        sum += array[i];
-    }
-    return sum;
+    if(row>=0 && row < array.GetLength(0) && column>=0 && column < array.GetLength(1)) return (true, array[row, column]);
+    else return (false, 0);
 }
 
-int size = InputSize("Input size");
-int[] array = ArrayCreation(size);
-int sum = UnEvenSum(array);
+void Resulter(bool isExist, int value)
+{
+    if(isExist) System.Console.WriteLine($"Value with index {row},{column} is: {value}");
+    else System.Console.WriteLine($"Value with index {row},{column} is not exist");
+}
+
+int rows = InputSize("Input ammount of rows");
+int columns = InputSize("Input ammount of columns");
+int[,] array = ArrayCreation(rows, columns);
+int row = InputSize("Input row");
+int column = InputSize("Input column");
 PrintArray(array);
-System.Console.WriteLine($"Sum of not even elements is equal: {sum}");
+
+
